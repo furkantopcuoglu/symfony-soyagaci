@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+</head>
+
+<form  action="{{ path('update_family_child', { 'id' : child.id }) }}" method="post" >
+
+
+    Birinci Seçiniz
+    <select name="birinci">
+        {% for k in kisi %}
+            <option value="{{k.id  }}" {{ k.id==child.birinci ? ' Selected': '' }}> {{ k.isim }}</option>
+        {% endfor %}
+    </select>
+
+    İkinci Seçiniz
+    <select name="ikinci">
+        {% for k in kisi %}
+            <option value="{{k.id  }}" {{ k.id==child.ikinci ? ' Selected': '' }}> {{ k.isim }}</option>
+        {% endfor %}
+    </select>
+
+   Çocuk Durumu Seçiniz
+    <select name="cocukdurumu">
+
+            <option value="1" {{ child.cocukdurumu==1 ? ' Selected': '' }}> Öz Evladım</option>
+            <option value="2" {{ child.cocukdurumu==2 ? ' Selected': '' }}> Üvey Evladım</option>
+
+    </select>
+
+
+
+    <button type="submit" class="btn btn-primary">Aile Güncelle</button>
+
+</form>
+</html>

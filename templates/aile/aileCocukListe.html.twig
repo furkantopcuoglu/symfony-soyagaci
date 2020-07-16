@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+</head>
+    <table>
+       Çocuk Tablosu
+        <tr>
+            <th>id</th>
+            <th>Ebeveyn</th>
+            <th>Çocuk</th>
+
+            <th>cocukdurumu</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+        {% for a in aile %}
+            <tr>
+
+                <td>{{ a.id }}</td>
+                <td>{{ a.birinci }}</td>
+                <td>{{ a.ikinci }}</td>
+
+                <td>{% if (a.cocukdurumu==1) %} Öz Evladım {% else %} Üvey Evladım {% endif %}</td>
+                <td><a href="{{ path('update_family_child',{id: a.id}) }}">Güncelle</a></td>
+                <td><a href="{{ path('delete_family_child',{id: a.id}) }}">Sil</a></td>
+
+
+            </tr>
+        {% endfor %}
+    </table>
+</html>

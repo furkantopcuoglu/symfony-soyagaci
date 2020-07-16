@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<form  action="{{ path('new_person') }}" method="post" >
+
+
+
+    Kişi İsmi
+    <input type="text"  name="isim"><br><br>
+    Kişi Soyismi
+    <input type="text"  name="soyisim"><br><br>
+    Cinsiyet Seçiniz
+    <select name="cinsiyet">
+
+                <option value="Erkek">Erkek</option>
+                <option value="Kadın">Kadın</option>
+
+
+    </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Ürün Ekle</button>
+
+</form>
+</html>

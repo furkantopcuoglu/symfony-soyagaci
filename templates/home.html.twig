@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Symfony Soyağacı</title>
+</head>
+<body>
+{% for key in sorgu %}
+
+    <b style="font: bold;font-size: 25px"> <b style="color: darkblue">1. Ebeveyn </b> <b style="color: black">{{ key.birinci_isim}} {{ key.birinci_soyisim}} <b style="color: #C82829">{{ key.birinci_cinsiyet }} </b></b> <b style="color: darkblue">2. Ebeveyn </b> <b style="color: black">{{ key.ikinci_isim}} {{ key.ikinci_soyisim}} <b style="color: #C82829">{{ key.ikinci_cinsiyet}} </b> </b> <br> </b>
+
+
+    {% for i in 0..sorguter|length-1 %}
+        {% for keyter in sorguter[i] %}
+
+            {% if( (keyter.birinci_id == key.birinci_id) or (keyter.birinci_id == key.ikinci_id) ) %}
+                <a style="padding-left: 40px;">  <b style="color: #C82829">Çocuk İsmi=</b> <b style="color: #F5871F">{{ keyter.isim }} {{ keyter.soyisim }} <b style="color: #C82829">{{ keyter.cinsiyet}} </b> </b> <b style="color: #8959A8"> Çocuk Durumu=</b>
+                    {% if keyter.cocukdurumu == 1 %}
+                        <b style="color: cadetblue">Öz Çocuk </b>
+                    {% else %}
+                        <b style="color: #B0413E">Evlatlık Çocuk </b>
+                    {% endif %}
+                </a>
+                <br>
+            {% endif %}
+
+
+        {% endfor %}
+    {% endfor %}
+
+{% endfor %}
+
+
+</body>
+</html>

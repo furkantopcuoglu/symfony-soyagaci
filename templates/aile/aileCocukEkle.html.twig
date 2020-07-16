@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<form  action="{{ path('new_family_child') }}" method="post" >
+
+
+
+    Ebeveyn Seçiniz
+    <select name="birinci">
+        {% for a in kisi %}
+        <option value="{{ a.id }}">{{ a.isim }} {{ a.soyisim }}</option>
+        {% endfor %}
+
+
+    </select>
+
+    Çocuk Seçiniz
+    <select name="ikinci">
+        {% for a in kisi %}
+            <option value="{{ a.id }}">{{ a.isim }} {{ a.soyisim }}</option>
+        {% endfor %}
+
+
+    </select>
+
+    Çocuk Durumunu Seçiniz
+    <select name="cocukdurumu">
+
+            <option value="1">Öz Evladım</option>
+            <option value="2">Üvey Evladım</option>
+
+    </select>
+
+    <button type="submit" class="btn btn-primary">Çocuk Ekle</button>
+
+</form>
+</html>

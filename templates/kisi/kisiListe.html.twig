@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+</head>
+    <table>
+        Kişiler Tablosu
+        <tr>
+            <th>id</th>
+            <th>isim</th>
+            <th>soyisim</th>
+            <th>cinsiyet</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+        {% for p in person %}
+            <tr>
+
+                <td>{{ p.id }}</td>
+                <td>{{ p.isim }}</td>
+                <td>{{ p.soyisim }}</td>
+                <td>{{ p.cinsiyet }}</td>
+                <td><a href="{{ path('update_person',{id: p.id}) }}">Güncelle</a></td>
+                <td><a href="{{ path('delete_person',{id: p.id}) }}">Sil</a></td>
+
+
+            </tr>
+        {% endfor %}
+    </table>
+</html>

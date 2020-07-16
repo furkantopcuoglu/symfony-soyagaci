@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+</head>
+
+<form  action="{{ path('update_person', { 'id' : person.id }) }}" method="post" >
+
+
+    Kişi İsmi
+    <input type="text" value="{{ person.isim }}"  name="isim"><br><br>
+    Kişi Soyismi
+    <input type="text" value="{{ person.soyisim }}"  name="soyisim"><br><br>
+    Cinsiyet Seçiniz
+    <select name="cinsiyet">
+
+                <option value="Erkek">Erkek</option>
+                <option value="Kadın">Kadın</option>
+
+
+    </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kişi Güncelle</button>
+
+</form>
+</html>

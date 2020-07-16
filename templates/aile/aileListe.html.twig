@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+</head>
+    <table>
+        Kişiler Tablosu
+        <tr>
+            <th>id</th>
+            <th>birinci</th>
+            <th>ikinci</th>
+            <th>iliskidurumu</th>
+            <th>cocukdurumu</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+        {% for a in aile %}
+            <tr>
+
+                <td>{{ a.id }}</td>
+                <td>{{ a.birinci }}</td>
+                <td>{{ a.ikinci }}</td>
+                <td>{{ a.iliskidurumu }}</td>
+                <td>{{ a.cocukdurumu }}</td>
+                <td><a href="{{ path('update_family',{id: a.id}) }}">Güncelle</a></td>
+                <td><a href="{{ path('delete_family',{id: a.id}) }}">Sil</a></td>
+
+
+            </tr>
+        {% endfor %}
+    </table>
+</html>

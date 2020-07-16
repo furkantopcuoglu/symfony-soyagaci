@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<form  action="{{ path('new_family') }}" method="post" >
+
+
+
+    Birinci Kişiyi Seçiniz
+    <select name="birinci">
+        {% for a in kisi %}
+        <option value="{{ a.id }}">{{ a.isim }} {{ a.soyisim }}</option>
+        {% endfor %}
+
+
+    </select>
+
+    İkinci Kişiyi Seçiniz
+    <select name="ikinci">
+        {% for a in kisi %}
+            <option value="{{ a.id }}">{{ a.isim }} {{ a.soyisim }}</option>
+        {% endfor %}
+
+
+    </select>
+
+    <button type="submit" class="btn btn-primary">Aile Evlendir</button>
+
+</form>
+</html>

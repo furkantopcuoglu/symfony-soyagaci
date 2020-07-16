@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+</head>
+
+<form  action="{{ path('update_family', { 'id' : aile.id }) }}" method="post" >
+
+
+    Birinci Seçiniz
+    <select name="birinci">
+        {% for k in kisi %}
+            <option value="{{k.id  }}" {{ k.id==aile.birinci ? ' Selected': '' }}> {{ k.isim }}</option>
+        {% endfor %}
+    </select>
+
+    İkinci Seçiniz
+    <select name="ikinci">
+        {% for k in kisi %}
+            <option value="{{k.id  }}" {{ k.id==aile.ikinci ? ' Selected': '' }}> {{ k.isim }}</option>
+        {% endfor %}
+    </select>
+
+
+
+    <button type="submit" class="btn btn-primary">Aile Güncelle</button>
+
+</form>
+</html>
