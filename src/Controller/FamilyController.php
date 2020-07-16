@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Logic\FamilyLogic;
-use App\Logic\PersonLogic;
 use App\Repository\AileRepository;
 use App\Repository\KisiRepository;
 use Symfony\Component\HttpFoundation\Request;

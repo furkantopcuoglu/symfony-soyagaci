@@ -1,15 +1,8 @@
 <?php
 namespace App\Logic;
 
-use App\Entity\Harcama;
 use App\Entity\Kisi;
-use App\Entity\Uyeler;
-
 use Doctrine\ORM\EntityManagerInterface;
-// Twig Response Dönemek için
-use Twig\Environment;
-
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class PersonLogic
@@ -18,10 +11,9 @@ class PersonLogic
     private $twig;
     protected $requestStack;
 
-    public function __construct(EntityManagerInterface $entityManager,Environment $twig,RequestStack $requestStack)
+    public function __construct(EntityManagerInterface $entityManager,RequestStack $requestStack)
     {
         $this->entityManager = $entityManager;
-        $this->twig = $twig;
         $this->requestStack = $requestStack;
     }
     public function addNewPerson()

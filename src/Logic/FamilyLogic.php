@@ -1,21 +1,14 @@
 <?php
 namespace App\Logic;
 
-
 use App\Entity\Aile;
 use App\Entity\Kisi;
-
-
 use Doctrine\ORM\EntityManagerInterface;
-
-
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class FamilyLogic
 {
     private $entityManager;
-
     protected $requestStack;
 
     public function __construct(EntityManagerInterface $entityManager,RequestStack $requestStack)
