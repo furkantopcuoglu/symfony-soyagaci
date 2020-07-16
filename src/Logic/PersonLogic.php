@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Logic;
 
 use App\Entity\Kisi;
@@ -10,11 +11,12 @@ class PersonLogic
     private $entityManager;
     protected $requestStack;
 
-    public function __construct(EntityManagerInterface $entityManager,RequestStack $requestStack)
+    public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack)
     {
         $this->entityManager = $entityManager;
         $this->requestStack = $requestStack;
     }
+
     public function addNewPerson()
     {
         $request = $this->requestStack->getCurrentRequest();
@@ -25,21 +27,21 @@ class PersonLogic
         $soyisim = $request->request->get('soyisim');
         $cinsiyet = $request->request->get('cinsiyet');
 
-        if($isim and $soyisim and $cinsiyet != null){
-                // Yeni Kişi Kayıt İşlemi
-                $person = new Kisi();
-                $person
+        if ($isim and $soyisim and null != $cinsiyet) {
+            // Yeni Kişi Kayıt İşlemi
+            $person = new Kisi();
+            $person
                     ->setIsim($isim)
                     ->setSoyisim($soyisim)
                     ->setCinsiyet($cinsiyet)
                 ;
-                $entityManager->persist($person);
-                $entityManager->flush();
+            $entityManager->persist($person);
+            $entityManager->flush();
         }
     }
+
     public function updatePerson($id)
     {
-
         $request = $this->requestStack->getCurrentRequest();
         $entityManager = $this->entityManager;
 
@@ -48,7 +50,7 @@ class PersonLogic
         $soyisim = $request->request->get('soyisim');
         $cinsiyet = $request->request->get('cinsiyet');
 
-        if($isim and $soyisim and $cinsiyet != null){
+        if ($isim and $soyisim and null != $cinsiyet) {
             // Kişi Güncelleme
             $person = $entityManager->getRepository(Kisi::class)->find($id);
             $person->setIsim($isim);

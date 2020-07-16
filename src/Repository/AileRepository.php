@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\Aile;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use http\Env\Response;
 
 /**
  * @method Aile|null find($id, $lockMode = null, $lockVersion = null)
@@ -48,27 +47,25 @@ class AileRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function kontrolSorgu($birinci,$ikinci): array
+    public function kontrolSorgu($birinci, $ikinci): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = 'SELECT iliskidurumu FROM aile where birinci_id in (:birinci,:ikinci) or ikinci_id in (:birinci,:ikinci) order by iliskidurumu asc';
         $stmt = $conn->prepare($sql);
-        $stmt->execute(['birinci' => $birinci,'ikinci'=>$ikinci]);
-
+        $stmt->execute(['birinci' => $birinci, 'ikinci' => $ikinci]);
 
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAll();
     }
 
-    public function kontrolSorguIki($birinci,$ikinci): array
+    public function kontrolSorguIki($birinci, $ikinci): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = 'SELECT iliskidurumu FROM aile where birinci_id in (:birinci,:ikinci) and ikinci_id in (:birinci,:ikinci)';
         $stmt = $conn->prepare($sql);
-        $stmt->execute(['birinci' => $birinci,'ikinci'=>$ikinci]);
-
+        $stmt->execute(['birinci' => $birinci, 'ikinci' => $ikinci]);
 
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAll();
@@ -80,8 +77,7 @@ class AileRepository extends ServiceEntityRepository
 
         $sql = 'SELECT iliskidurumu,birinci_id FROM aile where ikinci_id=:ikinci';
         $stmt = $conn->prepare($sql);
-        $stmt->execute(['ikinci'=>$ikinci]);
-
+        $stmt->execute(['ikinci' => $ikinci]);
 
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAll();
@@ -93,22 +89,19 @@ class AileRepository extends ServiceEntityRepository
 
         $sql = 'SELECT iliskidurumu FROM aile where iliskidurumu=1 and birinci_id in (:birinci) or ikinci_id in (:birinci) order by iliskidurumu asc LIMIT 1';
         $stmt = $conn->prepare($sql);
-        $stmt->execute(['birinci'=>$birinci]);
-
+        $stmt->execute(['birinci' => $birinci]);
 
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAll();
     }
 
-
-    public function evlileriListele($birinci,$ikinci): array
+    public function evlileriListele($birinci, $ikinci): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = 'SELECT aile.birinci_id, kisi.isim ,kisi.soyisim, kisi.cinsiyet, aile.cocukdurumu FROM aile INNER JOIN kisi on aile.ikinci_id=kisi.id where birinci_id in (:birinci,:ikinci) and iliskidurumu=2 order by birinci_id asc';
         $stmt = $conn->prepare($sql);
-        $stmt->execute(['birinci' => $birinci,'ikinci'=>$ikinci]);
-
+        $stmt->execute(['birinci' => $birinci, 'ikinci' => $ikinci]);
 
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAll();
@@ -122,7 +115,6 @@ class AileRepository extends ServiceEntityRepository
         $stmt = $conn->prepare($sql);
         $stmt->execute();
 
-
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAll();
     }
@@ -134,7 +126,6 @@ class AileRepository extends ServiceEntityRepository
         $sql = 'SELECT * FROM `kisi` where id=:birinci';
         $stmt = $conn->prepare($sql);
         $stmt->execute(['birinci' => $birinci]);
-
 
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAll();
@@ -148,67 +139,57 @@ class AileRepository extends ServiceEntityRepository
         $stmt = $conn->prepare($sql);
         $stmt->execute(['ikinci' => $ikinci]);
 
-
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAll();
     }
 
     public function aileIsimSorgu($tumAile): array
     {
-
-        foreach ($tumAile as $key){
-            $verilerarray=[
+        foreach ($tumAile as $key) {
+            $verilerarray = [
                 'id' => $key->getId(),
                 'birinci' => $key->getBirinci()->getIsim(),
                 'ikinci' => $key->getIkinci()->getIsim(),
-                'iliskidurumu'=> $key->getIliskidurumu(),
+                'iliskidurumu' => $key->getIliskidurumu(),
                 'cocukdurumu' => $key->getCocukdurumu(),
             ];
 
-            $data[]=$verilerarray;
+            $data[] = $verilerarray;
         }
+
         return $data;
     }
 
     public function aileTekIsimSorgu($tumAile): array
     {
-        while ($tumAile){
-            $verilerarray=[
+        while ($tumAile) {
+            $verilerarray = [
                 'id' => $tumAile->getId(),
                 'birinci' => $tumAile->getBirinci()->getId(),
                 'ikinci' => $tumAile->getIkinci()->getId(),
-                'iliskidurumu'=> $tumAile->getIliskidurumu(),
+                'iliskidurumu' => $tumAile->getIliskidurumu(),
                 'cocukdurumu' => $tumAile->getCocukdurumu(),
             ];
 
-
             return $verilerarray;
         }
-
-
     }
 
     public function cocukIsimSorgu($tumAile): array
     {
-
-        foreach ($tumAile as $key){
-            if($key->getIliskidurumu() == 2){
-
-
-            $verilerarray=[
+        foreach ($tumAile as $key) {
+            if (2 == $key->getIliskidurumu()) {
+                $verilerarray = [
                 'id' => $key->getId(),
                 'birinci' => $key->getBirinci()->getIsim(),
                 'ikinci' => $key->getIkinci()->getIsim(),
-                'iliskidurumu'=> $key->getIliskidurumu(),
+                'iliskidurumu' => $key->getIliskidurumu(),
                 'cocukdurumu' => $key->getCocukdurumu(),
             ];
-                $data[]=$verilerarray;
+                $data[] = $verilerarray;
             }
-
-
         }
+
         return $data;
     }
-
-
 }

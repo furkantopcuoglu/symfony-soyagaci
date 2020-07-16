@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Logic;
 
 use App\Entity\Aile;
@@ -11,7 +12,7 @@ class FamilyLogic
     private $entityManager;
     protected $requestStack;
 
-    public function __construct(EntityManagerInterface $entityManager,RequestStack $requestStack)
+    public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack)
     {
         $this->entityManager = $entityManager;
         $this->requestStack = $requestStack;
@@ -19,7 +20,6 @@ class FamilyLogic
 
     public function addNewFamily()
     {
-
         $request = $this->requestStack->getCurrentRequest();
         $entityManager = $this->entityManager;
         //Requestten gelen verileri okuyoruz.
@@ -34,13 +34,10 @@ class FamilyLogic
         ->setIliskidurumu(1);
         $entityManager->persist($aile);
         $entityManager->flush();
-
-
     }
 
     public function updateFamily($id)
     {
-
         $request = $this->requestStack->getCurrentRequest();
         $entityManager = $this->entityManager;
 
@@ -48,7 +45,7 @@ class FamilyLogic
         $birinci = $request->request->get('birinci');
         $ikinci = $request->request->get('ikinci');
 
-        if($birinci and $ikinci != null){
+        if ($birinci and null != $ikinci) {
             // Kişi Güncelleme
             $family = $entityManager->getRepository(Aile::class)->find($id);
             $family->setBirinci($entityManager->find(Kisi::class, $birinci));
@@ -69,7 +66,6 @@ class FamilyLogic
 
     public function addNewFamilyChild()
     {
-
         $request = $this->requestStack->getCurrentRequest();
         $entityManager = $this->entityManager;
         //Requestten gelen verileri okuyoruz.
@@ -87,13 +83,10 @@ class FamilyLogic
         ;
         $entityManager->persist($aile);
         $entityManager->flush();
-
-
     }
 
     public function updateFamilyChild($id)
     {
-
         $request = $this->requestStack->getCurrentRequest();
         $entityManager = $this->entityManager;
 
@@ -102,7 +95,7 @@ class FamilyLogic
         $ikinci = $request->request->get('ikinci');
         $cocukdurumu = $request->request->get('cocukdurumu');
 
-        if($birinci and $ikinci != null){
+        if ($birinci and null != $ikinci) {
             // Çocuk Güncelleme
             $child = $entityManager->getRepository(Aile::class)->find($id);
             $child->setBirinci($entityManager->find(Kisi::class, $birinci));
