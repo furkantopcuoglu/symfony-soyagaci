@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class PersonLogic
 {
     private $entityManager;
-    private $twig;
     protected $requestStack;
 
     public function __construct(EntityManagerInterface $entityManager,RequestStack $requestStack)
