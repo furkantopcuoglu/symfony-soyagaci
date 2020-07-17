@@ -9,6 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+    //Burada $aileRepository->fetchAll() gibi kendi fonksiyonumu çağırıp
+    // onu bir değişkene atayıp örneğin $tumVeri burada $tumVeri->getIsim gibi nasıl çekerim ?
+    // $aileRepository->cocukEbeveynListele(); burdan ->getIsim gibi gelmiyor !
     /**
      * @Route("/", name="home_index", methods={"GET"})
      * @param AileRepository $aileRepository
