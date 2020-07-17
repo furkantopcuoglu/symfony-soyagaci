@@ -27,7 +27,7 @@ class PersonLogic
         $soyisim = $request->request->get('soyisim');
         $cinsiyet = $request->request->get('cinsiyet');
 
-        if ($isim and $soyisim and null != $cinsiyet) {
+        if ($isim && $soyisim && null != $cinsiyet) {
             // Yeni Kişi Kayıt İşlemi
             $person = new Kisi();
             $person
@@ -50,7 +50,7 @@ class PersonLogic
         $soyisim = $request->request->get('soyisim');
         $cinsiyet = $request->request->get('cinsiyet');
 
-        if ($isim and $soyisim and null != $cinsiyet) {
+        if ($isim && $soyisim && null != $cinsiyet) {
             // Kişi Güncelleme
             $person = $entityManager->getRepository(Kisi::class)->find($id);
             $person->setIsim($isim);

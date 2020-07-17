@@ -45,7 +45,7 @@ class FamilyLogic
         $birinci = $request->request->get('birinci');
         $ikinci = $request->request->get('ikinci');
 
-        if ($birinci and null != $ikinci) {
+        if ($birinci && null != $ikinci) {
             // Kişi Güncelleme
             $family = $entityManager->getRepository(Aile::class)->find($id);
             $family->setBirinci($entityManager->find(Kisi::class, $birinci));
@@ -95,7 +95,7 @@ class FamilyLogic
         $ikinci = $request->request->get('ikinci');
         $cocukdurumu = $request->request->get('cocukdurumu');
 
-        if ($birinci and null != $ikinci) {
+        if ($birinci && null != $ikinci) {
             // Çocuk Güncelleme
             $child = $entityManager->getRepository(Aile::class)->find($id);
             $child->setBirinci($entityManager->find(Kisi::class, $birinci));

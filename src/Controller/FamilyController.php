@@ -81,7 +81,7 @@ class FamilyController extends AbstractController
         $birinci = $request->request->get('birinci');
         $ikinci = $request->request->get('ikinci');
         // Seçilen değerin 2 side aynı olması engelleniyor.
-        if ($birinci and null != $ikinci) {
+        if ($birinci && null != $ikinci) {
             if ($birinci == $ikinci) {
                 return new Response('İkiside aynı kişi !');
             } else {
@@ -144,7 +144,7 @@ class FamilyController extends AbstractController
         $ikinci = $request->request->get('ikinci');
         // Seçilen değerin 2 side aynı olması engelleniyor.
 
-        if ($birinci and null != $ikinci) {
+        if ($birinci && null != $ikinci) {
             if ($birinci == $ikinci) {
                 return new Response('İkiside aynı kişi !');
             }
@@ -206,7 +206,7 @@ class FamilyController extends AbstractController
         $ikinci = $request->request->get('ikinci');
         // Seçilen değerin 2 side aynı olması engelleniyor.
 
-        if ($birinci and null != $ikinci) {
+        if ($birinci && null != $ikinci) {
             if ($birinci == $ikinci) {
                 return new Response('İkiside aynı kişi !');
             }
