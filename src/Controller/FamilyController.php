@@ -5,7 +5,10 @@ namespace App\Controller;
 use App\Logic\FamilyLogic;
 use App\Repository\AileRepository;
 use App\Repository\KisiRepository;
+use App\Service\FamilyService;
+use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,14 +16,66 @@ use Symfony\Component\Routing\Annotation\Route;
 class FamilyController extends AbstractController
 {
     /**
+     * @Route("/servis-kayit", name="servis_kayit", methods={"GET","POST"})
+     *
+     * @param KisiRepository $kisiRepository
+     * @param FamilyLogic $familyLogic
+     * @param Request $request
+     * @param FamilyService $familyService
+     * @param AileRepository $aileRepository
+     * @return JsonResponse|Response
+     *
+     * @throws DBALException
+     */
+    public function newServiceAddFamily(KisiRepository $kisiRepository, FamilyLogic $familyLogic, Request $request, FamilyService $familyService, AileRepository $aileRepository)
+    {
+        $birinci = $request->request->get('birinci');
+        $ikinci = $request->request->get('ikinci');
+        if ($birinci && null != $ikinci) {
+
+            // FamilyService ile Requestten gelen verileri Servis Fonksiyonuma göndererek
+            // Requestten gelen verilerin koşullarla kontrol edilmesini sağlıyorum.
+            $servisKontrol = $familyService->newFamilyAddControll($birinci, $ikinci, $aileRepository);
+
+
+            // Eğer servisden gelen cevap true yani koşullara takılmamış
+            // kayıt edilebilir anlamındaysa Logic ile kaydı gerçekleştiriyorum.
+            if (true == $servisKontrol[1]) {
+
+                // FamilyLogic ile yeni Evli Çift kaydı gerçekleştiriliyor.
+                $familyLogic->addNewFamily();
+
+                // Eklenen kayıt sonrası twig render ediliyor.
+                return $this->render('aile/aileEkle.html.twig', [
+                    'kisi' => $kisiRepository->findAll(),
+                ]);
+            } else {
+
+                // Eğer Servisimden true yanıtı almazssam
+                // servisimin bana gönderdiği hata mesajını
+                // JsonResponse olarak dönüyorum.
+                return new JsonResponse($servisKontrol[0]);
+            }
+
+        }
+
+        return $this->render('aile/aileEkle.html.twig', [
+            'kisi' => $kisiRepository->findAll(),
+        ]);
+    }
+
+    /**
      * @Route("/newFamily", name="new_family", methods={"GET","POST"})
+     *
+     * @param FamilyService $familyService
      * @param Request $request
      * @param FamilyLogic $familyLogic
      * @param AileRepository $aileRepository
      * @param KisiRepository $kisiRepository
      * @return Response
+     * @throws DBALException
      */
-    public function newFamily(Request $request, FamilyLogic $familyLogic, AileRepository $aileRepository, KisiRepository $kisiRepository): Response
+    public function newFamily(FamilyService $familyService, Request $request, FamilyLogic $familyLogic, AileRepository $aileRepository, KisiRepository $kisiRepository): Response
     {
         $birinci = $request->request->get('birinci');
         $ikinci = $request->request->get('ikinci');
@@ -116,8 +171,6 @@ class FamilyController extends AbstractController
 
     /**
      * @Route("/listFamily", name="list_family", methods={"GET","POST"})
-     * @param AileRepository $aileRepository
-     * @return Response
      */
     public function listFamily(AileRepository $aileRepository): Response
     {
@@ -132,11 +185,13 @@ class FamilyController extends AbstractController
 
     /**
      * @Route("/newFamilyChild", name="new_family_child", methods={"GET","POST"})
+     *
      * @param Request $request
      * @param FamilyLogic $familyLogic
      * @param AileRepository $aileRepository
      * @param KisiRepository $kisiRepository
      * @return Response
+     * @throws DBALException
      */
     public function newFamilyChild(Request $request, FamilyLogic $familyLogic, AileRepository $aileRepository, KisiRepository $kisiRepository): Response
     {
@@ -197,8 +252,10 @@ class FamilyController extends AbstractController
      * @param Request $request
      * @param FamilyLogic $familyLogic
      * @param $id
+     *
      * @param AileRepository $aileRepository
      * @return Response
+     * @throws DBALException
      */
     public function updateFamilyChild(KisiRepository $kisiRepository, Request $request, FamilyLogic $familyLogic, $id, AileRepository $aileRepository): Response
     {

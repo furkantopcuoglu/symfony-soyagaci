@@ -31,12 +31,12 @@ class FamilyLogic
 
     public function addNewFamily()
     {
+
         $request = $this->requestStack->getCurrentRequest();
         $entityManager = $this->entityManager;
         //Requestten gelen verileri okuyoruz.
         $birinci = $request->request->get('birinci');
         $ikinci = $request->request->get('ikinci');
-
         // Yeni Evli Çift Kaydı
         $aile = new Aile();
         $aile
@@ -45,6 +45,7 @@ class FamilyLogic
         ->setIliskidurumu(1);
         $entityManager->persist($aile);
         $entityManager->flush();
+
     }
 
     /**
