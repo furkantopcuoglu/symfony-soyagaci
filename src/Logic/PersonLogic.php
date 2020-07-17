@@ -8,9 +8,20 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class PersonLogic
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
+    /**
+     * @var RequestStack
+     */
     protected $requestStack;
 
+    /**
+     * PersonLogic constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param RequestStack $requestStack
+     */
     public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack)
     {
         $this->entityManager = $entityManager;
@@ -40,6 +51,9 @@ class PersonLogic
         }
     }
 
+    /**
+     * @param $id
+     */
     public function updatePerson($id)
     {
         $request = $this->requestStack->getCurrentRequest();
@@ -60,6 +74,9 @@ class PersonLogic
         }
     }
 
+    /**
+     * @param $id
+     */
     public function deletePerson($id)
     {
         $entityManager = $this->entityManager;

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Aile;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\DBALException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,6 +15,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AileRepository extends ServiceEntityRepository
 {
+    /**
+     * AileRepository constructor.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Aile::class);
@@ -47,6 +51,14 @@ class AileRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @param $birinci
+     * @param $ikinci
+     *
+     * @return array
+     * @throws DBALException
+     */
     public function kontrolSorgu($birinci, $ikinci): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -59,6 +71,13 @@ class AileRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
+    /**
+     * @param $birinci
+     * @param $ikinci
+     *
+     * @return array
+     * @throws DBALException
+     */
     public function kontrolSorguIki($birinci, $ikinci): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -71,6 +90,12 @@ class AileRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
+    /**
+     * @param $ikinci
+     *
+     * @return array
+     * @throws DBALException
+     */
     public function kontrolSorguUc($ikinci): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -83,6 +108,12 @@ class AileRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
+    /**
+     * @param $birinci
+     *
+     * @return array
+     * @throws DBALException
+     */
     public function kontrolSorguDort($birinci): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -95,6 +126,13 @@ class AileRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
+    /**
+     * @param $birinci
+     * @param $ikinci
+     *
+     * @return array
+     * @throws DBALException
+     */
     public function evlileriListele($birinci, $ikinci): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -107,6 +145,9 @@ class AileRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
+    /**
+     * @throws DBALException
+     */
     public function cocukEbeveynListele(): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -119,6 +160,12 @@ class AileRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
+    /**
+     * @param $birinci
+     *
+     * @return array
+     * @throws DBALException
+     */
     public function birinciEbeveynIsmi($birinci): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -131,6 +178,12 @@ class AileRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
+    /**
+     * @param $ikinci
+     *
+     * @return array
+     * @throws DBALException
+     */
     public function ikinciEbeveynIsmi($ikinci): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -143,6 +196,10 @@ class AileRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
+    /**
+     * @param $tumAile
+     * @return array
+     */
     public function aileIsimSorgu($tumAile): array
     {
         foreach ($tumAile as $key) {
@@ -160,6 +217,10 @@ class AileRepository extends ServiceEntityRepository
         return $data;
     }
 
+    /**
+     * @param $tumAile
+     * @return array
+     */
     public function aileTekIsimSorgu($tumAile): array
     {
         while ($tumAile) {
@@ -175,6 +236,10 @@ class AileRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @param $tumAile
+     * @return array
+     */
     public function cocukIsimSorgu($tumAile): array
     {
         foreach ($tumAile as $key) {

@@ -76,6 +76,5 @@ class HomeController extends AbstractController
             'sorguter' => $dataevliolanlar,
         ]);
 
-        exit();
     }
 }

@@ -9,9 +9,20 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class FamilyLogic
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
+    /**
+     * @var RequestStack
+     */
     protected $requestStack;
 
+    /**
+     * FamilyLogic constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param RequestStack $requestStack
+     */
     public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack)
     {
         $this->entityManager = $entityManager;
@@ -36,6 +47,9 @@ class FamilyLogic
         $entityManager->flush();
     }
 
+    /**
+     * @param $id
+     */
     public function updateFamily($id)
     {
         $request = $this->requestStack->getCurrentRequest();
@@ -54,6 +68,9 @@ class FamilyLogic
         }
     }
 
+    /**
+     * @param $id
+     */
     public function deleteFamily($id)
     {
         $entityManager = $this->entityManager;
@@ -85,6 +102,9 @@ class FamilyLogic
         $entityManager->flush();
     }
 
+    /**
+     * @param $id
+     */
     public function updateFamilyChild($id)
     {
         $request = $this->requestStack->getCurrentRequest();
@@ -106,6 +126,9 @@ class FamilyLogic
         }
     }
 
+    /**
+     * @param $id
+     */
     public function deleteFamilyChild($id)
     {
         $entityManager = $this->entityManager;
