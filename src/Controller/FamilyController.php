@@ -40,7 +40,7 @@ class FamilyController extends AbstractController
 
             // Eğer servisden gelen cevap true yani koşullara takılmamış
             // kayıt edilebilir anlamındaysa Logic ile kaydı gerçekleştiriyorum.
-            if (true == $servisKontrol[1]) {
+            if (true === $servisKontrol) {
 
                 // FamilyLogic ile yeni Evli Çift kaydı gerçekleştiriliyor.
                 $familyLogic->addNewFamily();
@@ -54,7 +54,7 @@ class FamilyController extends AbstractController
                 // Eğer Servisimden true yanıtı almazssam
                 // servisimin bana gönderdiği hata mesajını
                 // JsonResponse olarak dönüyorum.
-                return new JsonResponse($servisKontrol[0]);
+                return new JsonResponse($servisKontrol);
             }
 
         }

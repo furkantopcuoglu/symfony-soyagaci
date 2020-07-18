@@ -20,7 +20,7 @@ class FamilyService
     {
         if ($birinci && null != $ikinci) {
             if ($birinci == $ikinci) {
-                return ['Hata Seçilenler Aynı', false];
+                return 'Hata Seçilenler Aynı';
             }
 
             // Aile Repository den sorgubir fonksiyonuna parametre
@@ -34,14 +34,14 @@ class FamilyService
             // yada sorgu boş dönerse yeni kisi olduğu için kayıt edilir.
             foreach ($sorgu as $key) {
                 if (1 == $key['iliskidurumu']) {
-                    return ['Hata Seçilenler Evli', false];
+                    return 'Hata Seçilenler Evli';
                 }
                 if (2 == $key['iliskidurumu']) {
                     // Return True gönderiyorum ve ekleme işleminin yapılabilir
                     // olduğunu söylüyorum.
                     // Controller kısmında servisim true değeri dönerse
                     // Logic ile kayıt işlemini yapıyorum.
-                    return ['', true];
+                    return true;
                 }
             }
             if (null == $sorgu) {
@@ -49,7 +49,7 @@ class FamilyService
                 // olduğunu söylüyorum.
                 // Controller kısmında servisim true değeri dönerse
                 // Logic ile kayıt işlemini yapıyorum.
-                return ['', true];
+                return true;
             }
         }
     }
